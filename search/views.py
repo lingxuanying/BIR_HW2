@@ -35,7 +35,7 @@ def show_post(request):
                 words = 0
                 sentences = 0
                 text = []
-                for title in article.iter('Title'):
+                for title in article.iter('ArticleTitle'):
                     title = title.text
                 for abstract in article.iter('Abstract'):
                     for t in abstract.iter('AbstractText'):
@@ -70,9 +70,9 @@ def show_post(request):
                 word_list = i["tweet_text"].split()
                 words = words + len(word_list)
                 sentences = sentences + len(sent_tokenize(i["tweet_text"]))
-                count = count + i["tweet_text"][1:].count(search_text)
+                count = count + i["tweet_text"].count(search_text)
                 all_text.append(
-                    {'username': i["username"], 'text': i["tweet_text"][1:].replace(search_text, "<mark>" + search_text + "</mark>")
+                    {'username': i["username"], 'text': i["tweet_text"].replace(search_text, "<mark>" + search_text + "</mark>")
                      , 'characters': characters, 'words': words, 'sentences': sentences})
 
             return render(request, "result2.html", {'all_text': all_text, 'count': count})
@@ -99,7 +99,7 @@ def handle_xml_upload(request):
                 words = 0
                 sentences = 0
                 text = []
-                for title in article.iter('Title'):
+                for title in article.iter('ArticleTitle'):
                     title = title.text
                 for abstract in article.iter('Abstract'):
                     for t in abstract.iter('AbstractText'):
@@ -134,7 +134,7 @@ def handle_xml_upload(request):
                 word_list = i["tweet_text"].split()
                 words = words + len(word_list)
                 sentences = sentences + len(sent_tokenize(i["tweet_text"]))
-                all_text.append({'username': i["username"], 'text': i["tweet_text"][1:], 'characters': characters, 'words': words,
+                all_text.append({'username': i["username"], 'text': i["tweet_text"], 'characters': characters, 'words': words,
                      'sentences': sentences})
 
             return render(request, "result2.html", {'all_text': all_text})

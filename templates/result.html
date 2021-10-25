@@ -47,6 +47,7 @@
             padding: 7px;
             padding-left: 20px;
             margin-bottom: 10px;
+            margin-left: 20px;
             font-size: larger;
             background-color: #e6ecec;
             color: #1a1e21;
@@ -54,7 +55,21 @@
             border-radius: 20px;
             float: right;
             width: 120px;
+            text-align: center;
         }
+        .spell_c{
+            text-align: right;
+            font-size: larger;
+            height: 30px;
+            background-color: transparent!important;
+            padding: 20px;
+        }
+        .table{
+            padding: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
     </style>
 </head>
     <body class="container" id="page-top">
@@ -67,46 +82,39 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolioModal1" data-bs-toggle="modal" data-bs-target="#portfolioModal1">UPLOAD</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/statistics">STATISTICS</a></li>
+
                     </ul>
-                    <form action="/show_post/" method="post">
-                        <input name="search_text" type="text" style="width: 50%;">
-                        {% csrf_token %}
-                        <input type="hidden" name="ok" value="yes">
-                        <input type="submit" value="Search" data-bs-dismiss="modal">
-                    </form>
+                    <input id="myText" name="search_text" type="text" style="width:30%;padding-right: 20px;">
+                    <button onclick="myFunction()" style="margin-right: 50px;">Search</button>
                 </div>
             </div>
         </nav>
 
         <div class="container" style="width: 85%;line-height: 30px;padding-top: 120px;" >
-        <div class="count">Find: {{ count }}</div>
-        {% for i in all_text %}
-            <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-username">
-                <a class="navbar-brand ">{{ i.title }}</a>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light spell_c">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
-                    <li class="nav-item dropdown active">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Chracters:{{ i.characters }}
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" >Words: {{ i.words }}</a>
-                        <a class="dropdown-item" >Phases: {{ i.sentences }}</a>
-                        </div>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link count" href="#">Find: {{ count }}</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Did you mean that?
+                            </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    {% for i in spell_c %}
+                                        <a class="dropdown-item" href="/search/{{ i.0 }}">{{ i.0 }}</a>
+                                    {% endfor %}
+                                </div>
+
+                        </li>
                     </ul>
                 </div>
             </nav>
-            {% for j in i.text %}
-                <p style="line-height: 30px;padding: 5px;">{{ j|safe }}</p>
-            {% endfor %}
-
-
-            {% endfor %}
         </div>
         <!-- Bootstrap core JS-->
 
@@ -146,5 +154,57 @@
                 </div>
             </div>
         </div>
+        <table border="1" class="table" style="width: 85%;">
+            <thead>
+            <tr>
+                <th>INDEX</th>
+                <th>TITLE</th>
+                <th>ABSTRACT</th>
+
+            </tr>
+            </thead>
+            {% for contact in contacts %}
+            <tr>
+                <td>{{ contact.index_field }}</td>
+                <td>{{ contact.title|safe }}</td>
+                <td>{{ contact.abstract|safe }}</td>
+
+            </tr>
+            {% endfor %}
+        </table>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item">
+              <a class="page-link" href="?page={{ contacts.1 }}">First</a>
+            </li>
+              {% if contacts.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ contacts.previous_page_number }}" tabindex="-1">Previous</a>
+            </li>
+              {% endif %}
+            <li class="page-item"><a class="page-link" href="?page={{ contacts.number }}">{{ contacts.number }}</a></li>
+          {% if contacts.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ contacts.next_page_number }}">{{ contacts.number|add:1 }}</a></li>
+          {% endif %}
+          {% if contacts.next_page_number|add:1 <=  contacts.paginator.num_pages%}
+            <li class="page-item"><a class="page-link" href="?page={{ contacts.next_page_number|add:1 }}">{{ contacts.number|add:2 }}</a></li>
+          {% endif %}
+          {% if contacts.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ contacts.next_page_number }}">Next</a>
+            </li>
+          {% endif %}
+          <li class="page-item">
+              <a class="page-link" href="?page={{ contacts.paginator.num_pages }}">Last</a>
+            </li>
+          </ul>
+        </nav>`
+    <script>
+        function myFunction() {
+            var text = document.getElementById("myText").value;
+            location.href = "/search/"+text;
+        }
+    </script>
     </body>
+
 </html>

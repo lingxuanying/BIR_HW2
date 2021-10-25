@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+    <p>RAW_TEXT</p>
+    <table border="1" style=width:100%>
+        <thead>
+        <tr>
+            <th>INDEX</th>>
+            <th>TITLE</th>
+            <th>ABSTRACT</th>
+
+        </tr>
+        </thead>
+        {% for contact in contacts %}
+        <tr>
+            <td>{{ contact.index_field }}</td>
+            <td>{{ contact.title }}</td>
+            <td>{{ contact.abstract }}</td>
+
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>

@@ -20,7 +20,8 @@ from search import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
-    path('result2/', views.handle_xml_upload),
-    path('show_post/', views.show_post),
+    #path('show_post/', views.show_post),
+    path('search/<str:text>', views.search),
+    path('statistics', views.statistics)
 
 ]

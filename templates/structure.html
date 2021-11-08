@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
@@ -84,6 +91,10 @@
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/structure">STRUCTURE</a></li>
 
                     </ul>
+                    <ul class="navbar-nav ms-auto">
+
+
+                    </ul>
                     <input id="myText" name="search_text" type="text" style="width:30%;padding-right: 20px;">
                     <button onclick="myFunction()" style="margin-right: 50px;">Search</button>
                 </div>
@@ -92,79 +103,17 @@
 
         <div class="container" style="width: 85%;line-height: 30px;padding-top: 120px;" >
             <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-username">
-                <a class="navbar-brand ">Zipf Distribution</a>
+                <a class="navbar-brand ">Structure of Project</a>
 
             </nav>
-            <div >
-                <figure class="right">
-                    <img src="{% static 'assets/img/log(Zipf_distribution).png'%}"class="rounded float-left">
-                    <figcaption>Zipf PMF for N = 10 on a log–log scale. The horizontal axis is the index k .</figcaption>
-                </figure>
-                <p style="line-height: 60px;padding: 5px;font-size: large;padding-top: 5%;"> Zipf's law is an empirical law formulated using mathematical statistics that refers to the fact that for many types of data studied in the physical and social sciences, the rank-frequency distribution is an inverse relation. The Zipfian distribution is one of a family of related discrete power law probability distributions.</p>
-            </div>
-
-            <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-username">
-                <a class="navbar-brand ">Comparison / Frequency</a>
-
-            </nav>
-            <table border="1" class="table-bordered center" style="width: 95%;text-align: center;">
-                <thead>
-                <tr>
-                    <th>TYPE</th>
-                    <th>IMAGE</th>
-
-
-                </tr>
-                </thead>
-                <tr>
-                    <td>TEXT</td>
-                    <td><img src="{% static 'assets/img/xy_statistic.png'%}"></td>
-                </tr>
-                <tr>
-                    <td>TEXT + Porter Algo</td>
-                    <td><img src="{% static 'assets/img/xy_porter_statistics.png'%}"></td>
-                </tr>
-                <tr>
-                    <td>TEXT + Porter Algo - Stopwords</td>
-                    <td><img src="{% static 'assets/img/xy_without_stopwords_statistics.png'%}"></td>
-
-                </tr>
-            </table>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-username">
-                <a class="navbar-brand ">Comparison / Log(Frequency)</a>
-
-            </nav>
-            <table border="1" class="table-bordered center" style="width: 95%;text-align: center;">
-                <thead>
-                <tr>
-                    <th>TYPE</th>
-                    <th>IMAGE</th>
-
-
-                </tr>
-                </thead>
-                <tr>
-                    <td>TEXT</td>
-                    <td><img src="{% static 'assets/img/log_xy (1).png'%}"></td>
-                </tr>
-                <tr>
-                    <td>TEXT + Porter Algo</td>
-                    <td><img src="{% static 'assets/img/log_xy_porter.png'%}"></td>
-                </tr>
-                <tr>
-                    <td>TEXT + Porter Algo - Stopwords</td>
-                    <td><img src="{% static 'assets/img/log_xy_without_stopwords (1).png'%}"></td>
-
-                </tr>
-            </table>
+            <img src="{% static 'assets/img/structure2.png'%}">
 
         </div>
-        <script>
+    <script>
             function myFunction() {
                 var text = document.getElementById("myText").value;
                 location.href = "/search/"+text;
             }
         </script>
-    </body>
-
+</body>
 </html>

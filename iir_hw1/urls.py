@@ -22,6 +22,7 @@ urlpatterns = [
     path('', views.index),
     #path('show_post/', views.show_post),
     path('search/<str:text>', views.search),
-    path('statistics', views.statistics)
+    path('statistics', views.statistics),
+    path('structure', views.structure)
 
 ]

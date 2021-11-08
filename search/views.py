@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse
-import xml.etree.ElementTree as ET
 from django.core.files.storage import FileSystemStorage
 import nltk
 nltk.download('punkt')
@@ -125,4 +124,5 @@ def statistics(request):
     return render(request, "statistics.html") #必须用这个return
 
 
-
+def structure(request):
+    return render(request, "structure.html") #必须用这个return
